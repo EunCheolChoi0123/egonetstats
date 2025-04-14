@@ -53,5 +53,6 @@ df['gender_iqv'] = egonet_composition(df, ['f1_gender', 'f2_gender', 'f3_gender'
 ```
 
 ## Future work
+- Exception? (probably not working well with egoes without alters)
 - Implement pipeline calculating structural properties, utilizing alter-alter ties.
 - Add other compositional measures (open to suggestions)
