@@ -51,6 +51,9 @@ def egonet_composition(df, column_list, stat, category=None):
                 values = values.astype(str)
                 count_cat = sum(values == category)
                 results.append(count_cat / len(values))
+            elif stat == 'exist' and category is not None:
+                values = values.astype(str)
+                results.append(1 if category in values.values else 0)
             else:
                 results.append(np.nan)
         except:
