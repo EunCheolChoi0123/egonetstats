@@ -55,8 +55,10 @@ def egonet_composition(df, column_list, stat, category=None):
                 values = values.astype(str)
                 results.append(1 if category in values.values else 0)
             else:
+                print(f"Unknown stat: {stat}")
                 results.append(np.nan)
         except:
+            print(f"Unknown error")
             results.append(np.nan)
 
     return results
