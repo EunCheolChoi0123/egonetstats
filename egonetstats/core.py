@@ -11,18 +11,19 @@ def blau_index(values):
     proportions = [v / total for v in counts.values()]
     return 1 - sum(p ** 2 for p in proportions)
 
-def iqv(values):
+def iqv(values, k=False):
     counts = Counter(values)
     total = sum(counts.values())
-    k = len(counts)
-    if total == 0:
-        return np.nan
+    if k==False:
+        k = len(counts)
     if k == 1:
         return 0.0  # Edge case; no variation
+    if total == 0:
+        return np.nan
     p_squared_sum = sum((count / total) ** 2 for count in counts.values())
     return (k / (k - 1)) * (1 - p_squared_sum)
 
-def egonet_composition(df, column_list, stat, category=None):
+def egonet_composition(df, column_list, stat, category=None, k=False):
     results = []
 
     for _, row in df.iterrows():
@@ -46,7 +47,7 @@ def egonet_composition(df, column_list, stat, category=None):
             elif stat == 'blau':
                 results.append(blau_index(values))
             elif stat == 'iqv':
-                results.append(iqv(values))
+                results.append(iqv(values, k))
             elif stat == 'proportion' and category is not None:
                 values = values.astype(str)
                 count_cat = sum(values == category)
